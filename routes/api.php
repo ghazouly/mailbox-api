@@ -15,7 +15,7 @@ use App\Http\Controllers\MessageController;
 */
 
 
-Route::group(['prefix'=>'/v1'],function () {
+Route::group(['prefix'=>'/v1', 'middleware'=>'check.auth'],function () {
 
       Route::get('messages', 'MessageController@index')->name('all-messages');
       Route::get('messages/{id}', 'MessageController@show')->name('show-message');
