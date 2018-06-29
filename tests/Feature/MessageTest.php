@@ -31,28 +31,17 @@ class MessageTest extends TestCase
             ]);
     }
 
-    public function testShow()
+    public function testShow($id=1)
     {
         $response = $this->withHeaders([
             'Authorization' => 'Bearer 00201008280777',
-        ])->json('GET', '/api/v1/messages/1');
+        ])->json('GET', '/api/v1/messages/'.$id);
 
         $response
             ->assertStatus(200)
-            ->assertExactJson([
+            ->assertJson([
                 	"message"=> "Message Listed Successfully",
                 	"result"=> [
-                  		"uid"=> 21,
-                  		"sender"=> "Ernest Hemingway",
-                  		"subject"=> "animals",
-                  		"message"=> null,
-                  		"is_read"=> 1,
-                  		"is_archived"=> 1,
-                  		"time_sent"=> [
-                    			"date"=> "2016-03-29 08:24:27.000000",
-                    			"timezone_type"=> 3,
-                    			"timezone"=> "UTC"
-                  		]
                   ]
             ]);
     }
