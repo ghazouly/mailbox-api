@@ -1,0 +1,158 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Mailbox API",
+        "version": "1.0.0"
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/messages": {
+            "get": {
+                "summary": "List All/Archived Messages",
+                "operationId": "getAllMessages",
+                "parameters": [
+                    {
+                        "name": "is_archived",
+                        "in": "query",
+                        "description": "It's optional. But if you want list Archived Messages, just set 'is_archived' to equal 1",
+                        "required": false,
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    },
+                    "401": {
+                        "description": "not authorized"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/messages/{id}": {
+            "get": {
+                "summary": "List Message",
+                "operationId": "getOneMessage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Select the Message you want to list by its Id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    },
+                    "401": {
+                        "description": "not authorized"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/messages/{id}/read": {
+            "get": {
+                "summary": "Read Message",
+                "operationId": "readMessage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Select the Message you want to make it Read by its Id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    },
+                    "401": {
+                        "description": "not authorized"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        },
+        "/messages/{id}/archive": {
+            "get": {
+                "summary": "Archive Message",
+                "operationId": "archiveMessage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Select the Message you want to make it Archived by its Id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    },
+                    "401": {
+                        "description": "not authorized"
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {},
+    "securityDefinitions": {
+        "default": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

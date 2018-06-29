@@ -25,7 +25,7 @@ class Message extends Model
             'uid'         => $this->user_id,
             'sender'      => $this->sender,
             'subject'     => $this->subject,
-            'message'     => $this->body,
+            'message'     => $this->message,
             'is_read'     => $this->is_read,
             'is_archived' => $this->is_archived,
             'time_sent'   => $this->created_at,

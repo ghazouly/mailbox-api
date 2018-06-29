@@ -1,5 +1,21 @@
 <?php
 
+/**
+ * @SWG\Swagger(
+ *   basePath="/api/v1",
+ *   @SWG\Info(
+ *     title="Mailbox API",
+ *     version="1.0.0"
+ *   ),
+ *   @SWG\SecurityScheme(
+ *          securityDefinition="default",
+ *          type="apiKey",
+ *          in="header",
+ *          name="Authorization"
+ *   )
+ * )
+ */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
