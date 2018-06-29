@@ -3,39 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Message;
+use App\Repository\MailboxRepo;
 use Illuminate\Http\Request;
+
 
 class MessageController extends Controller
 {
+
+    public function __construct(MailboxRepo $mailbox_repo) {
+        $this->mailbox_repo = $mailbox_repo;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $is_archived=0)
     {
-        //
-    }
+        $messages = $this->mailbox_repo->getAllMessages($is_archived=0);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return response()->json([
+            'message' => 'Messages Listed Successfully',
+            'result'  => $messages
+        ],200);
     }
 
     /**
@@ -44,42 +35,46 @@ class MessageController extends Controller
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show($id)
     {
-        //
+        $message = $this->mailbox_repo->getOneMessage($id);
+
+        return response()->json([
+            'message' => 'Message Listed Successfully',
+            'result'  => $messages
+        ],200);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Display the specified resource.
      *
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function edit(Message $message)
+    public function read($id)
     {
-        //
+        $message = $this->mailbox_repo->readMessage($id);
+
+        return response()->json([
+            'message' => 'Message Read Successfully',
+            'result'  => $message
+        ],200);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Message $message)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * Display the specified resource.
      *
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function archive()
     {
-        //
+        $message = $this->mailbox_repo->archiveMessage($id);
+
+        return response()->json([
+            'message' => 'Message Archived Successfully',
+            'result'  => $message
+        ],200);
     }
+
 }
