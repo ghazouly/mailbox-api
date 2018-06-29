@@ -19,9 +19,9 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $is_archived=0)
+    public function index(Request $request)
     {
-        $messages = $this->mailbox_repo->getAllMessages($is_archived=0);
+        $messages = $this->mailbox_repo->getAllMessages($request->is_archived ?? 0);
 
         return response()->json([
             'message' => 'Messages Listed Successfully',
@@ -41,7 +41,7 @@ class MessageController extends Controller
 
         return response()->json([
             'message' => 'Message Listed Successfully',
-            'result'  => $messages
+            'result'  => $message
         ],200);
     }
 
@@ -67,7 +67,7 @@ class MessageController extends Controller
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function archive()
+    public function archive($id)
     {
         $message = $this->mailbox_repo->archiveMessage($id);
 

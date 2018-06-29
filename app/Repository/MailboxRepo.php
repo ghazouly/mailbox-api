@@ -9,9 +9,8 @@ Class MailboxRepo extends AbstractRepo
 {
     public function getAllMessages($is_archived=0)
     {
-
+        // dd($is_archived);
         $messages = Message::where('is_archived', $is_archived)
-                            ->latest()
                             ->paginate(5);
 
         return $messages;
@@ -44,7 +43,7 @@ Class MailboxRepo extends AbstractRepo
 
         $message = Message::find($id);
 
-        if ($message->is_archived) {
+        if ($message->is_archived == 0) {
             $message->update([
                 'is_archived' => 1
               ]);

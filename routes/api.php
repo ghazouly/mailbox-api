@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::group(['prefix'=>'/v1'],function () {
+
+      Route::get('messages', 'MessageController@index')->name('all-messages');
+      Route::get('messages/{id}', 'MessageController@show')->name('show-message');
+      Route::get('messages/{id}/read', 'MessageController@read')->name('read-message');
+      Route::get('messages/{id}/archive', 'MessageController@archive')->name('archive-message');
+
 });
